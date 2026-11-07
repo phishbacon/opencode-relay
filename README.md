@@ -127,6 +127,18 @@ pnpm check
 
 `pnpm check` runs TypeScript checks, all tests, and package builds.
 
+## Releases
+
+Releases from `master` are managed by Semantic Release. Use Conventional Commit prefixes for changes that should publish a new version:
+
+- `fix:` creates a patch release.
+- `feat:` creates a minor release.
+- A `BREAKING CHANGE:` footer or breaking `!` creates a major release.
+
+Commits such as `docs:`, `test:`, and `chore:` do not publish a release unless they contain a breaking change.
+
+When a release is created, GitHub Actions creates the `v<version>` Git tag and GitHub Release and publishes the same version tag to `ghcr.io/<owner>/<repository>`. This repository is private to the workspace and is not published to npm.
+
 ## OpenCode V2 plugin
 
 Build `packages/plugin` with:
