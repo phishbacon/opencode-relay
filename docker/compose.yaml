@@ -1,0 +1,30 @@
+name: opencode-relay-frontdoor
+
+services:
+  relay:
+    image: ${OPENCODE_RELAY_IMAGE:-opencode-relay:0.1.0-experimental}
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    init: true
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 128
+    tmpfs:
+      - /tmp:rw,nosuid,nodev,size=16m
+    network_mode: host
+    environment:
+      HOST: 127.0.0.1
+      PORT: ${OPENCODE_RELAY_PORT:-8080}
+      OPENCODE_RELAY_PUBLIC_URL: ${OPENCODE_RELAY_PUBLIC_URL:?Set the browser-facing OpenCode origin}
+      OPENCODE_RELAY_UPSTREAM_URL: ${OPENCODE_RELAY_UPSTREAM_URL:-http://127.0.0.1:4096}
+      OPENCODE_RELAY_VAPID_SUBJECT: ${OPENCODE_RELAY_VAPID_SUBJECT:?Set a VAPID contact}
+      OPENCODE_RELAY_TOKEN: ${OPENCODE_RELAY_TOKEN:?Set the shared plugin event token}
+    volumes:
+      - relay-data:/app/data
+    stop_grace_period: 40s
+
+volumes:
+  relay-data:

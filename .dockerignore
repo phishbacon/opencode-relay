@@ -1,0 +1,17 @@
+.git
+.gitignore
+**/node_modules
+**/dist
+**/coverage
+**/.vite
+**/*.tsbuildinfo
+**/data
+.env
+.env.*
+**/.env
+**/.env.*
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.log
