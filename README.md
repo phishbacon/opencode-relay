@@ -16,7 +16,7 @@ See [front-door configuration and API](docs/backend.md), [notification enrollmen
 - Push payloads contain only a generic outcome, event tag, and exact OpenCode session URL. Prompts, responses, directories, and session titles are not included.
 - VAPID keys, browser subscriptions, and event/execution deduplication are persisted in SQLite.
 
-The installed Home Screen app remains **OpenCode at the configured public origin**. There is no separate Relay PWA.
+Install **OpenCode at the configured public origin** as the Home Screen app.
 
 ## Workspace
 
@@ -114,7 +114,7 @@ For production, keep the shared token out of version control; use your normal Op
 4. Select **Enable notifications** and grant notification permission.
 5. Complete an OpenCode root-session run, background the PWA, and confirm the notification arrives. Tapping it should open the exact originating OpenCode session.
 
-The notification page does not create a separate Relay account or PWA. It uses the existing OpenCode origin and root-scoped service worker.
+The notification page uses the existing OpenCode origin and root-scoped service worker.
 
 ## Development
 
